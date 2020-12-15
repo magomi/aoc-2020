@@ -41,4 +41,4 @@ I started late with this puzzle and couldn't solve it until now (day 13).
 
 What I can tell is that my current solution looks far too complicated. And if I've learned something throughout my developers live: if it's a complicated and complex solution then it is the wrong solution.
 
-Hopefully I will get back to this puzzle and finish it.
+Hopefully I will get back to this puzzle and finish it. In the meanwhile I will try and catch on with the missing days (currently 12 and 13).
