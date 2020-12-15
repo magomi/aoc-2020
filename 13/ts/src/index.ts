@@ -30,6 +30,14 @@ export function task2(linesStr:string[], offset:number) {
             lines.push(parseInt(lineStr))
         }
     })
+    // var maxLine = 0
+    // var maxLineIdx = 0
+    // for (var i = 0; i < lines.length; i ++) {
+    //     if (maxLine < lines[i]) {
+    //         maxLine = lines[i]
+    //         maxLineIdx = i
+    //     }
+    // }
     
     var t = offset
     while(t % lines[0] != 0) {
@@ -51,6 +59,10 @@ export function task2(linesStr:string[], offset:number) {
             break
         }
         t = t + lines[0]
+        // t = t + maxLine - maxLineIdx
+        // while(t % lines[0] != 0) {
+        //     t = t + 1
+        // }
     }
     return t
 }
