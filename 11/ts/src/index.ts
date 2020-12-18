@@ -8,18 +8,20 @@ file.split("\n").forEach(line => {
     lines.push(line.trim())
 });
 
-var plan = new Plan(lines);
-var nextGenerationPlan = plan.calcNextGeneration();
-while(!plan.isSame(nextGenerationPlan)) {
-    plan = nextGenerationPlan;
-    nextGenerationPlan = plan.calcNextGeneration();
-}
-console.log(`${nextGenerationPlan.countOccupiedSeats()} seats are occupied`);
-
 // var plan = new Plan(lines);
-// var nextGenerationPlan = plan.calcNextGenerationNew();
+// var nextGenerationPlan = plan.calcNextGeneration();
 // while(!plan.isSame(nextGenerationPlan)) {
 //     plan = nextGenerationPlan;
-//     nextGenerationPlan = plan.calcNextGenerationNew();
+//     nextGenerationPlan = plan.calcNextGeneration();
 // }
 // console.log(`${nextGenerationPlan.countOccupiedSeats()} seats are occupied`);
+
+var plan = new Plan(lines);
+var i = 0
+var nextGenerationPlan = plan.calcNextGenerationNew();
+while(!plan.isSame(nextGenerationPlan)) {
+    console.log(i++)
+    plan = nextGenerationPlan;
+    nextGenerationPlan = plan.calcNextGenerationNew();
+}
+console.log(`${nextGenerationPlan.countOccupiedSeats()} seats are occupied`);

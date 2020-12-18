@@ -89,7 +89,7 @@ export class Plan {
         this.positions.set(position, seat);
     }
 
-    calcOccupiedNeighbours(x:number, y:number):number {
+    calcOccupiedNeighbourPositions(x:number, y:number):number {
         let occupiedNeighbours = 0;
         for (var i = x - 1; i <= x + 1; i ++) {
             for (var j = y - 1; j <= y + 1; j ++) {
@@ -106,7 +106,7 @@ export class Plan {
         return occupiedNeighbours;
     }
 
-    calcVisibleOccupiedNeighbours(x:number, y:number):number {
+    calcOccupiedNeighbourSeats(x:number, y:number):number {
         let visibleOccupiedNeighbours = 0;
 
         // up 
@@ -213,9 +213,9 @@ export class Plan {
         for (var x = 0; x < this.getWidth(); x++) {
             for (var y = 0; y < this.getHeight(); y++) {
                 let seat = this.getSeatAt(x, y);
-                if (seat != undefined && seat.isSeat && !seat.isOccupied && this.calcOccupiedNeighbours(x, y) == 0) {
+                if ((seat != undefined) && seat.isSeat && !seat.isOccupied && this.calcOccupiedNeighbourPositions(x, y) == 0) {
                     nextGenenerationPlan.setSeatAt(x, y, new Seat(true, true));
-                } else if (seat != undefined && seat.isOccupied && this.calcOccupiedNeighbours(x, y) >= 4) {
+                } else if (seat != undefined && seat.isOccupied && this.calcOccupiedNeighbourPositions(x, y) >= 4) {
                     nextGenenerationPlan.setSeatAt(x, y, new Seat(true, false));
                 } else {
                     nextGenenerationPlan.setSeatAt(x, y, seat);
@@ -230,9 +230,9 @@ export class Plan {
         for (var x = 0; x < this.getWidth(); x++) {
             for (var y = 0; y < this.getHeight(); y++) {
                 let seat = this.getSeatAt(x, y);
-                if (seat != undefined && seat.isSeat && !seat.isOccupied && this.calcOccupiedNeighbours(x, y) == 0) {
+                if (seat != undefined && seat.isSeat && !seat.isOccupied && this.calcOccupiedNeighbourSeats(x, y) == 0) {
                     nextGenenerationPlan.setSeatAt(x, y, new Seat(true, true));
-                } else if (seat != undefined && seat.isOccupied && this.calcVisibleOccupiedNeighbours(x, y) >= 5) {
+                } else if (seat != undefined && seat.isOccupied && this.calcOccupiedNeighbourSeats(x, y) >= 5) {
                     nextGenenerationPlan.setSeatAt(x, y, new Seat(true, false));
                 } else {
                     nextGenenerationPlan.setSeatAt(x, y, seat);

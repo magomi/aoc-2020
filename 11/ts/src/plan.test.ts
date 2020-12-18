@@ -69,9 +69,9 @@ test("load positions from seats_02.data", () => {
 test("calc occupied neighbours from seats_02.data", () => {
     var data:string[] = load("seats_02.data");
     var plan = new Plan(data);
-    expect(plan.calcOccupiedNeighbours(0, 0)).toBe(2);
-    expect(plan.calcOccupiedNeighbours(2, 0)).toBe(4);
-    expect(plan.calcOccupiedNeighbours(4, 2)).toBe(5);
+    expect(plan.calcOccupiedNeighbourPositions(0, 0)).toBe(2);
+    expect(plan.calcOccupiedNeighbourPositions(2, 0)).toBe(4);
+    expect(plan.calcOccupiedNeighbourPositions(4, 2)).toBe(5);
 });
 
 // test("toString", () => {
@@ -122,20 +122,28 @@ test("calc stable generation from seats_01.data", () => {
 })
 
 test("calc visibleOccupiedNeighbours", () => {
-    expect(new Plan([".#.", ".#.", "..."]).calcVisibleOccupiedNeighbours(1,1)).toBe(1);
-    expect(new Plan(["..#", ".#.", "..."]).calcVisibleOccupiedNeighbours(1,1)).toBe(1);
-    expect(new Plan(["...", ".##", "..."]).calcVisibleOccupiedNeighbours(1,1)).toBe(1);
-    expect(new Plan(["...", ".#.", "..#"]).calcVisibleOccupiedNeighbours(1,1)).toBe(1);
-    expect(new Plan(["...", ".#.", ".#."]).calcVisibleOccupiedNeighbours(1,1)).toBe(1);
-    expect(new Plan(["...", ".#.", "#.."]).calcVisibleOccupiedNeighbours(1,1)).toBe(1);
-    expect(new Plan(["...", "##.", "..."]).calcVisibleOccupiedNeighbours(1,1)).toBe(1);
-    expect(new Plan(["#..", ".#.", "..."]).calcVisibleOccupiedNeighbours(1,1)).toBe(1);
+    expect(new Plan([".#.", ".#.", "..."]).calcOccupiedNeighbourSeats(1,1)).toBe(1);
+    expect(new Plan(["..#", ".#.", "..."]).calcOccupiedNeighbourSeats(1,1)).toBe(1);
+    expect(new Plan(["...", ".##", "..."]).calcOccupiedNeighbourSeats(1,1)).toBe(1);
+    expect(new Plan(["...", ".#.", "..#"]).calcOccupiedNeighbourSeats(1,1)).toBe(1);
+    expect(new Plan(["...", ".#.", ".#."]).calcOccupiedNeighbourSeats(1,1)).toBe(1);
+    expect(new Plan(["...", ".#.", "#.."]).calcOccupiedNeighbourSeats(1,1)).toBe(1);
+    expect(new Plan(["...", "##.", "..."]).calcOccupiedNeighbourSeats(1,1)).toBe(1);
+    expect(new Plan(["#..", ".#.", "..."]).calcOccupiedNeighbourSeats(1,1)).toBe(1);
     
-    var plan = new Plan([ ".......#", "...#.....", ".#.......", ".........", "..#L....#", "....#....", ".........", "#........", "...#....."]);
-    expect(plan.calcVisibleOccupiedNeighbours(3, 4)).toBe(8);
+    var plan = new Plan([ ".......#.", 
+                          "...#.....", 
+                          ".#.......", 
+                          ".........", 
+                          "..#L....#", 
+                          "....#....", 
+                          ".........", 
+                          "#........", 
+                          "...#....."]);
+    expect(plan.calcOccupiedNeighbourSeats(3, 4)).toBe(8);
 
     var plan = new Plan([".............", ".L.L.#.#.#.#.", "............."]);
-    expect(plan.calcVisibleOccupiedNeighbours(1, 1)).toBe(0);
+    expect(plan.calcOccupiedNeighbourSeats(1, 1)).toBe(0);
 })
 
 test("calc next generation (new) from seats_01.data", () => {
