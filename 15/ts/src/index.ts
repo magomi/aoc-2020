@@ -1,22 +1,14 @@
 
-export function play(init: number[], turnCnt: number, log = false) {
+export function play(init: number[], turnCnt: number) {
   var nums = init;
-  if (log) {
-    console.log(`${nums}`)
+  var lastNum = nums[nums.length - 1];
+  while (nums.length < turnCnt) {
+    var lastIndex = nums.lastIndexOf(lastNum, nums.length - 2);
+    lastNum = (lastIndex > -1 ? nums.length  - 1 - lastIndex : 0)
+    nums.push(lastNum)
   }
-  var lastNum;
-  while (nums.length <= turnCnt) {
-    lastNum = nums[nums.length - 1];
-    var lastIndex = nums.slice(0, nums.length - 1).lastIndexOf(lastNum);
-    if (lastIndex > -1) {
-      nums.push(nums.length  - 1 - lastIndex);
-    } else {
-      nums.push(0);
-    }
-    if (log) {
-      console.log(`${nums[nums.length - 1]}`)
-    }
-  }
-  return lastNum
+  return nums[nums.length - 1];
 }
-console.log(`${play([20, 9, 11, 0, 1, 2], 2020, false)}`);
+
+// console.log(`${play([20, 9, 11, 0, 1, 2], 2020, false)}`);
+// console.log(`${play([20, 9, 11, 0, 1, 2], 30000000, false)}`);
