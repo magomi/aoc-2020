@@ -1,14 +1,23 @@
 
 export function play(init: number[], turnCnt: number) {
-  var nums = init;
-  var lastNum = nums[nums.length - 1];
-  while (nums.length < turnCnt) {
-    var lastIndex = nums.lastIndexOf(lastNum, nums.length - 2);
-    lastNum = (lastIndex > -1 ? nums.length  - 1 - lastIndex : 0)
-    nums.push(lastNum)
+  var nums: Map<number, number> = new Map();
+  for (var i = 0; i < init.length - 1; i++) {
+    nums.set(init[i], i);
   }
-  return nums[nums.length - 1];
+  var lastNum = init[init.length - 1];
+  var nextNum = 0;
+  for (var i = init.length - 1; i < turnCnt - 1; i++) {
+    var lastIndex = nums.get(lastNum);
+    if (lastIndex == undefined) {
+      nextNum = 0;
+    } else {
+      nextNum = i - lastIndex;
+    } 
+    nums.set(lastNum, i);
+    lastNum = nextNum;
+  }
+  return lastNum;
 }
 
-// console.log(`${play([20, 9, 11, 0, 1, 2], 2020, false)}`);
-// console.log(`${play([20, 9, 11, 0, 1, 2], 30000000, false)}`);
+console.log(`${play([20, 9, 11, 0, 1, 2], 2020)}`);
+console.log(`${play([20, 9, 11, 0, 1, 2], 30000000)}`);
